@@ -1,0 +1,46 @@
+/* 
+ * responsive.css
+ *
+ * created by: Michelle Chan
+ * created on: 09/28/2016
+ * purpose   : create a responsive web page of Homer Simpson swallowed by bush
+ */
+
+
+@media screen
+    and (min-width: 801px)
+    and (max-width: 1200px) {
+        .homer {
+            width: 310px;
+            height: 310px;
+            background:url(homer.jpg) -310px 0px;
+        }
+    }
+
+@media screen
+    and (min-width: 1201px) {
+        .homer {
+            width: 310px;
+            height: 310px;
+            background:url(homer.jpg) 0 0px;
+        }
+    }
+
+@media screen
+    and (min-width: 401px)
+    and (max-width: 800px) {
+        .homer {
+            width: 310px;
+            height: 310px;
+            background:url(homer.jpg) 0px -310px;
+        }
+    }
+
+@media screen
+    and (max-width: 400px) {
+        .homer {
+            width: 310px;
+            height: 310px;
+            background:url(homer.jpg) -310px -310px;
+        }
+    }
