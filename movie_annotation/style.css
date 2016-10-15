@@ -6,3 +6,11 @@
  * purpose   : stylesheet for index.html, comp20 lab4
  */
 
+#title {
+    text-align: center;
+    color: pink;
+    background-image: url("corgi.gif");
+    height: 700px;
+    line-height: 700px;
+    width: 700px;
+};
