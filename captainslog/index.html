@@ -8,13 +8,18 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
-        // Your work will be done here...
+        if (localStorage['message']) {
+            msgLog = localStorage['message'];
+        }
+//        else {
+            msgLog = "";
+//        }
         $(function() {
             $("input").keypress(function() {
                 var key = event.which;
                 if (key == 13) {
+                    // console.log(localStorage['message']);
                     event.preventDefault();
-                
                     newMsg = document.getElementById("msg").value;
                     toUpdate = document.getElementById("log");
 
@@ -22,20 +27,15 @@
                     dateString = newDate.toDateString();
                     timeString = newDate.toTimeString();
                     newDate = dateString + " " + timeString;
-                    printMsg =  '<p>' + newDate + " - " + newMsg + '</p>';
+                    newMsg =  '<p>' + newDate + " - " + newMsg + '</p>';
 
-                    newElem = document.createElement("p");
-                    newElem.innerHTML = '<p><div id="message">' + printMsg +
-                        " </span></p>";
-                    toUpdate.insertBefore(newElem, toUpdate.childNodes[0]);
-                    document.getElementById("msg").value = "";
-
-//                    localStorage.setItem(message, printMsg);
-//                    $(document ).load(function () {
-//                        localStorage[new Date().getTime()] = printMsg;
-//                        toUpdate.innerHTML = "???";
-//                    }
-
+                    if (!localStorage['message']) {
+                        localStorage.setItem('message', newMsg);
+                    }
+                    else {
+                        localStorage.setItem('message', newMsg + localStorage['message']);
+                    }
+                    $( toUpdate ).prepend(newMsg);
                 }
             });
         });
