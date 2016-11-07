@@ -10,9 +10,36 @@
     <script>
         // Your work will be done here...
         $(function() {
-            console.log( "ready!" );
-            newMsg = document.getElementById("msg").value;
+            $("input").keypress(function() {
+                var key = event.which;
+                if (key == 13) {
+                    event.preventDefault();
+                
+                    newMsg = document.getElementById("msg").value;
+                    toUpdate = document.getElementById("log");
+
+                    newDate = new Date();
+                    dateString = newDate.toDateString();
+                    timeString = newDate.toTimeString();
+                    newDate = dateString + " " + timeString;
+                    printMsg =  '<p>' + newDate + " - " + newMsg + '</p>';
+
+                    newElem = document.createElement("p");
+                    newElem.innerHTML = '<p><div id="message">' + printMsg +
+                        " </span></p>";
+                    toUpdate.insertBefore(newElem, toUpdate.childNodes[0]);
+                    document.getElementById("msg").value = "";
+
+//                    localStorage.setItem(message, printMsg);
+//                    $(document ).load(function () {
+//                        localStorage[new Date().getTime()] = printMsg;
+//                        toUpdate.innerHTML = "???";
+//                    }
+
+                }
+            });
         });
+
     </script>
 </head>
 
