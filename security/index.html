@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <h2>Introduction</h2>
+    <h2>Introduction of Security and Privacy Assessment</h2>
     <p>The product is a leaderboard for the game 2048 hosted at 
     https://boiling-coast-60915.herokuapp.com. The username, score, and 
     time/date the game was played are listed in order of descending score. This
@@ -30,41 +30,71 @@
     <h2>Issues Found</h2>
     <h3>Issue 1: Cross-site scripting (XSS)</h3>
     <ul>
-        <li>Location: Mainly in the POST request /submit.json,
-         getting the request body.</li>
-        <li>Severity: High. The product is a leaderboard, but XSS can ruin the 
-        layout of the entire site by embedding anything that HTML allows, 
-        include fake scores and grids, and prevent access
-        to the site through pop-ups. The least harm is annoyance, the most
-        harm is ruining the purpose of the product.</li>
-        <li>Description: The problem was found using curl. I wrote HTML to embed
-        the video of Pen-Pineapple-Apple-Pen from Youtube as my username.</li>
-        <li>Proof: Screenshot of '/'.
-        <br><img id="ppap" src="ppap.png"></li>
+    <li>Location: Mainly in the POST request /submit.json,
+     getting the request body.</li>
+    <li>Severity: High. The product is a leaderboard, but XSS can ruin the 
+    layout of the entire site by embedding anything that HTML allows, 
+    include fake scores and grids, and prevent access
+    to the site through pop-ups. The least harm is annoyance, the most
+    harm is ruining the purpose of the product.</li>
+    <li>Description: The problem was found using curl. I wrote HTML to embed
+    the video of Pen-Pineapple-Apple-Pen from Youtube as my username.</li>
+    <li>Proof: Screenshot of '/'.
+    <br><img class="resize" src="ppap.png"></li>
 
-        <li>Resolution:
-         The issue can be solved by sanitizing the input. Remove angle brackets
-        to prevent script tags. Although it can be pretty simple to replace the
-        special characters, it may be a better idea to sanitize with a library
-        that can sanitize the code more thoroughly.</li>
+    <li>Resolution:
+     The issue can be solved by sanitizing the input. Remove angle brackets
+    to prevent script tags. Although it can be pretty simple to replace the
+    special characters, it may be a better idea to sanitize with a library
+    that can sanitize the code more thoroughly.</li>
     </ul>
     
     <h3>Issue 2: Database Injection</h3>
-        <li>Location:</li>
-        <li>Severity:</li>
-        <li>Description:</li>
-        <li>Proof:</li>
-        <li>Resolution</li>
+    <ul>
+    <li>Location: '/scores.json'. The injection happens when the username is 
+    searched for in the database.</li>
+    <li>Severity: The severity is medium. All the scores for all users
+    can be returned, meaning anybody can access the entire database. However, 
+    the program does not have very sensitive information. A score and date is
+    not too important. The username could be searched elsewhere on the web, but
+    also does not seem to pose much of a risk to be accessed.</li>
+    <li>Description: The vulnerability was found by directly entering in
+    a query string for the username. An example: '/scores.json?username[$ne]=' 
+    with the query left blank or with a string.
+    </li>
+    <li>Proof: Screenshot
+    <br><img class="resize" src="injected.png"></li>
+    </ul>
 
-    <h3>Issue 3: Null vs Undefined</h3>
-        <li>Location:</li>
-        <li>Severity:</li>
-        <li>Description:</li>
-        <li>Proof:</li>
-        <li>Resolution</li>
+    <li>Resolution: The issue can be resolved by sanitizing the input so
+    that the input cannot have query operators.</li>
 
-    <h2>Conclusion</h2>
+    <h3>Issue 3: Lack of Encryption</h3>
+    <ul>
+    <li>Location: '/submit.json'.</li>
+    <li>Severity: Low. The severity is low because the data is not too
+        important in this case.</li>
+    <li>Description: The grid is not information that the client has access
+    to. A good extra step to take to prevent people from accessing the
+    grid is to encrypt it before putting it in the database. For instance, 
+    this may be good to protect against proxies or unknown attacks because
+    encrpyted data, even after stolen, would still need to be decrypted to be
+    useful.
+     </li>
+        <li>Proof: The lack of encryption is the proof.</li>
+        <li>Resolution: MongoDB has encryption methods to encrypt the database,
+         either in-flight or at-rest. </li>
+    </ul>
+
+         <h2>Conclusion</h2>
+         <p>It is important for the layout of the product to be preserved. 
+         The majority of the issues can be fixed by sanitizing user input 
+         because the input could be anything, whether nonsensical and/or 
+         malicious. To prevent access to too much data, preventing injections
+         in the database and encryption are useful. The costs of better code
+         is very little. 
+     </body>
+ </html>
 </body>
 
 </html>	
-
