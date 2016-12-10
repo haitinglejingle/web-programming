@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
+<link rel="stylesheet" href="security.css"/>
 <title>Security Assessment</title>
 </head>
 
@@ -16,10 +17,52 @@
     <h2>Methodology</h2>
     First, I tried "black box" testing. Then, I looked at the code to target
     specific vulnerabilities I saw.
-    Tools and methodologies I used include query strings, curl, and Burp Suite. 
+    Tools and methodologies I used include query strings, curl, and Burp Suite.
     <h2>Abstract of Findings</h2>
-
+    One of the most severe, but easy to execute attacks in this product is 
+    cross-site scripting. The username, score, and grid inputs are not sanitized.
+    Another vulnerability is database injection. In this case, it is possible to
+    get all the records, even though one might not have access to all the user
+    data.
+    Throughout the code, "null" is incorrectly used instead of "undefined" when 
+    checking variables, which is a vulnerability that gives an easy window for 
+    crashing the application if an undefined variable is accessed.  
     <h2>Issues Found</h2>
+    <h3>Issue 1: Cross-site scripting (XSS)</h3>
+    <ul>
+        <li>Location: Mainly in the POST request /submit.json,
+         getting the request body.</li>
+        <li>Severity: High. The product is a leaderboard, but XSS can ruin the 
+        layout of the entire site by embedding anything that HTML allows, 
+        include fake scores and grids, and prevent access
+        to the site through pop-ups. The least harm is annoyance, the most
+        harm is ruining the purpose of the product.</li>
+        <li>Description: The problem was found using curl. I wrote HTML to embed
+        the video of Pen-Pineapple-Apple-Pen from Youtube as my username.</li>
+        <li>Proof: Screenshot of '/'.
+        <br><img id="ppap" src="ppap.png"></li>
+
+        <li>Resolution:
+         The issue can be solved by sanitizing the input. Remove angle brackets
+        to prevent script tags. Although it can be pretty simple to replace the
+        special characters, it may be a better idea to sanitize with a library
+        that can sanitize the code more thoroughly.</li>
+    </ul>
+    
+    <h3>Issue 2: Database Injection</h3>
+        <li>Location:</li>
+        <li>Severity:</li>
+        <li>Description:</li>
+        <li>Proof:</li>
+        <li>Resolution</li>
+
+    <h3>Issue 3: Null vs Undefined</h3>
+        <li>Location:</li>
+        <li>Severity:</li>
+        <li>Description:</li>
+        <li>Proof:</li>
+        <li>Resolution</li>
+
     <h2>Conclusion</h2>
 </body>
 
