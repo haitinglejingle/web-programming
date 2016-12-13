@@ -3,13 +3,11 @@ $(function() {
 	var username = localStorage.getItem("username");
 	var welcome = document.getElementById("welcome");
 	var name = document.getElementById("name");
-	if (visited == "false") {
+	if (visited == null) {
 		localStorage.setItem("visited","true");
-		console.log("ee");
 		welcome.innerHTML = "<p class='lead'>Hello, you're new here!" + "<br>"
 	 	+ "Can you tell me your name? " + "You don't have to, but" + "<br>" 
 	 	+ "it helps me rememeber what your garden looks like.</p>";
-	 		
 	 	name.innerHTML = "<form>" + 
 	 	"<input id='nameform' type='text' name='username'><br><input type='submit' value='enter'>"
 		+ "</form><br>";
@@ -30,7 +28,6 @@ $(function() {
 function getGarden(username) {
 	$.post("https://afternoon-refuge-73840.herokuapp.com/login", {username: username}, function( data ) {
 		// would return the following: {age: [], watered: []};
-
 
 	});
 }
