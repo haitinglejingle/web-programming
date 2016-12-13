@@ -1,0 +1,26 @@
+Five steps for expanding dynamic array:
+
+Fish *fish;
+
+Fish *fish = new fish[capacity];
+
+what if the next fish exceeds cap?
+
+1. Make a new bigger fish array
+
+Fish *newFish = new Fish[capacity*2];
+
+2. Copy the variables over from old to
+   new fish array
+
+3. Delete old fish array
+
+delete[] fish;
+
+4. Set new fish array
+
+fish = newFish;
+
+5. update cap
+
+capacity = capacity*2;
