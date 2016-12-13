@@ -24,14 +24,11 @@ $(function() {
 		var flowerID = plotID + ".sprite-flower";
 
 		if ($(dirtID).length > 0) {
-			// plant bud
 			$(plotID).addClass("sprite-sprout").removeClass("sprite-dirt");
-			//$(".plot").find(id).css("background", "url(pics/spritesheet.png) -115px -115px");
-			//$('#message').empty();
 			message.innerHTML = "<p class='lead'>You planted a daisy.</p>"
 			var username = localStorage.getItem("username");
 			var species = "daisy";
-			// convert letter to number for plot
+			// convert letter to number for plot sending postition for post request
 			var plotID = $(fID)[0].id;
 			var position = plotID.charCodeAt(0) - 97;
 
@@ -41,10 +38,13 @@ $(function() {
 			);
 		} else if ($(sproutID).length > 0) {
 			$(plotID).addClass("sprite-bud").removeClass("sprite-sprout");
+			message.innerHTML = "<p class='lead'>Your daisy is budding.</p>"
 		} else if ($(budID).length > 0) {
 			$(plotID).addClass("sprite-flower").removeClass("sprite-bud");
+			message.innerHTML = "<p class='lead'>You daisy is flowering.</p>"
 		} else if ($(flowerID).length > 0) {
 			$(plotID).addClass("sprite-dirt").removeClass("sprite-flower");
+			message.innerHTML = "<p class='lead'>You removed the flower.</p>"
 		}
 		
 		e.preventDefault();
