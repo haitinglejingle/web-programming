@@ -3,7 +3,7 @@ $(function() {
 	var username = localStorage.getItem("username");
 	var welcome = document.getElementById("welcome");
 	var name = document.getElementById("name");
-	if (visited == null) {
+	if (visited === null) {
 		localStorage.setItem("visited","true");
 		welcome.innerHTML = "<p class='lead'>Hello, you're new here!" + "<br>"
 	 	+ "Can you tell me your name? " + "You don't have to, but" + "<br>" 
