@@ -1,43 +1,59 @@
 $(function() {
-	localStorage.setItem("visited","false");
 	var visited = localStorage.getItem("visited");
 	var username = localStorage.getItem("username");
-	
+	var welcome = document.getElementById("welcome");
+	var name = document.getElementById("name");
 	if (visited == "false") {
-		// localStorage.setItem("visited","true");
-		var welcome = document.getElementById("welcome");
+		localStorage.setItem("visited","true");
+		console.log("ee");
 		welcome.innerHTML = "<p class='lead'>Hello, you're new here!" + "<br>"
 	 	+ "Can you tell me your name? " + "You don't have to, but" + "<br>" 
 	 	+ "it helps me rememeber what your garden looks like.</p>";
 	 		
-	 	var name = document.getElementById("name");
 	 	name.innerHTML = "<form>" + 
 	 	"<input id='nameform' type='text' name='username'><br><input type='submit' value='enter'>"
 		+ "</form><br>";
 	} else if (visited === "true") {
+		if (username === null) {
+			welcome.innerHTML = "<p class='lead'>Welcome back, guest! " 
+			+ "Enter your name if you want to sign up." + "</p>";
+			name.innerHTML = "<form>" + 
+	 	"<input id='nameform' type='text' name='username'><br><input type='submit' value='enter'>"
+		+ "</form><br>";
+		} else {
+			welcome.innerHTML = "<p class='lead'>Welcome back, " + username + "</p>";
+			getGarden(username);
+		}
 	}
 });
 
+function getGarden(username) {
+	$.ajax({
+		type: "POST",
+		crossDomain: true,
+		url: "https://afternoon-refuge-73840.herokuapp.com/login",
+		data: "username=" + username,
+		success: function() {
+			// returned the following: {age: [], watered: []};
+		}
+	});
+}
+
 $("#name").submit(function(e) {
-	var username = $("#nameform").serialize();
-	/*
+	var username = $("#nameform").val();
+	// localStorage.setItem("username", username);
+
 	$.ajax({
 		type: "POST",
 		crossDomain: true,
 		url: "https://afternoon-refuge-73840.herokuapp.com/new-user",
-		data: username,
+		data: $("#nameform").serialize(),
 		success: function() {
-			console.log("mich was here");
-			welcome.innerHTML = "Great, let's start planting, " + username + "!";
+			var name = document.getElementById("name");
 			name.innerHTML = "";
+			welcome.innerHTML = "<p class='lead'>Great, let's start planting, " + username + "!</p>";
+			
 		}
 	});
-*/
-	 posting = $.post("https://afternoon-refuge-73840.herokuapp.com/new-user", username);
-	posting.done(function() {
-		console.log("mich was here");
-		welcome.innerHTML = "Great, let's start planting, " + username + "!";
-		name.innerHTML = "";	
-	});	
 	e.preventDefault(); 
 });
