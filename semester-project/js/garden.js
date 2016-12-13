@@ -30,7 +30,7 @@ $(function() {
 			var species = "daisy";
 			// convert letter to number for plot sending postition for post request
 			var plotID = $(fID)[0].id;
-			var position = plotID.charCodeAt(0) - 97;
+			var pos = plotID.charCodeAt(0) - 97;
 
 			// make post request
 			$.post("https://afternoon-refuge-73840.herokuapp.com/new-flower", 
