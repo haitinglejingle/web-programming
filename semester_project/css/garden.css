@@ -1,0 +1,26 @@
+.garden {
+	width: 100px;
+	height: 100px;
+	display: inline-block;
+	
+	background:url(../pics/dirt.png) 0px 0px;
+}
+
+.new-row {
+	margin-top: -5px;
+}
+
+.img-responsive{width:100%;}
+
+/* 
+@media screen
+    and (min-width: 801px)
+    and (max-width: 1200px) {
+        .homer {
+            width: 310px;
+            height: 310px;
+            background:url(homer.jpg) -310px 0px;
+        }
+	}
+	*/
+
