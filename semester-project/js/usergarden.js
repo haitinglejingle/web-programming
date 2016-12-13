@@ -28,19 +28,14 @@ $(function() {
 });
 
 function getGarden(username) {
-	$.ajax({
-		type: "POST",
-		crossDomain: true,
-		url: "https://afternoon-refuge-73840.herokuapp.com/login",
-		data: "username=" + username,
-		success: function() {
-			// returned the following: {age: [], watered: []};
-		}
+	$.post("https://afternoon-refuge-73840.herokuapp.com/login", function( data ) {
+		// returned the following: {age: [], watered: []};	}
 	});
 }
 
 $("#name").submit(function(e) {
 	var username = $("#nameform").val();
+	// uncomment this out when you're sure the program works!!
 	// localStorage.setItem("username", username);
 
 	$.ajax({

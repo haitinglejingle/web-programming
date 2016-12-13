@@ -1,13 +1,46 @@
-.garden {
+. {
 	width: 100px;
 	height: 100px;
 	display: inline-block;
-	
 	background:url(../pics/dirt.png) 0px 0px;
 }
 
 .new-row {
 	margin-top: -5px;
+}
+
+.sprite {
+    background-image: url(../pics/spritesheet.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.sprite-bud {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    background: url(../pics/spritesheet.png) -5px -5px;
+}
+
+.sprite-dirt {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    background: url(../pics/spritesheet.png) -115px -5px;
+}
+
+.sprite-flower {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    background: url(../pics/spritesheet.png) -5px -115px;
+}
+
+.sprite-sprout {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    background: url(../pics/spritesheet.png) -115px -115px;
 }
 
 .img-responsive{width:100%;}
