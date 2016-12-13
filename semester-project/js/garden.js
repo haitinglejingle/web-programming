@@ -33,6 +33,7 @@ $(function() {
 			var position = plotID.charCodeAt(0) - 97;
 
 			// make post request
+			
 			$.post("https://afternoon-refuge-73840.herokuapp.com/new-flower", 
 				{"username": username, "species": species, "pos": position});
 		} else if ($(sproutID).length > 0) {
