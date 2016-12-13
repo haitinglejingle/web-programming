@@ -20,6 +20,7 @@ $(function() {
 
 $("#name").submit(function(e) {
 	var username = $("#nameform").serialize();
+	/*
 	$.ajax({
 		type: "POST",
 		crossDomain: true,
@@ -31,5 +32,12 @@ $("#name").submit(function(e) {
 			name.innerHTML = "";
 		}
 	});
+*/
+	 posting = $.post("https://afternoon-refuge-73840.herokuapp.com/new-user", username);
+	posting.done(function() {
+		console.log("mich was here");
+		welcome.innerHTML = "Great, let's start planting, " + username + "!";
+		name.innerHTML = "";	
+	});	
 	e.preventDefault(); 
 });
