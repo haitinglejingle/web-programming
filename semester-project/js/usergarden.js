@@ -35,7 +35,7 @@ function getGarden(username) {
 $("#name").submit(function(e) {
 	var username = $("#nameform").val();
 	// uncomment this out when you're sure the program works!!
-	// localStorage.setItem("username", username);
+	localStorage.setItem("username", username);
 
 	$.ajax({
 		type: "POST",
