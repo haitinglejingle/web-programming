@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Flowers</title>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
+    </head> 
+    <body>
+        <form id="flowerForm">
+            <h4>Choose a flower to add:</h4>
+            <input id="radFlowers" type ="radio" name="name" value="poppy">Poppy<br>
+            <input id="radFlowers" type ="radio" name="name" value="daisy">Daisy<br>
+            <input id="radFlowers" type ="radio" name="name" value="campion">Campion<br>
+            <input id="radFlowers" type ="radio" name="name" value="orchid">Orchid<br>
+            <input type="submit">
+        </form>
+
+    <script>
+        $("#flowerForm").submit(function(event) {
+            event.preventDefault();
+            var $form = $(this),
+            radVal = $form.find("input[name='name']:checked").val();
+
+            if (radVal !== undefined) {
+                console.log(radVal);
+                var posting = $.post("https://afternoon-refuge-73840.herokuapp.com/new-flower", {"name": radVal});
+            }
+        }); 
+        </script>
+    </body>
+</html>

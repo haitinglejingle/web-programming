@@ -28,7 +28,7 @@ $(function() {
 });
 
 function getGarden(username) {
-	$.post("https://afternoon-refuge-73840.herokuapp.com/login", function( data ) {
+	$.post("https://afternoon-refuge-73840.herokuapp.com/login", {"username":username}, function( data ) {
 		// returned the following: {age: [], watered: []};	}
 	});
 }
